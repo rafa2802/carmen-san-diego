@@ -21,5 +21,5 @@ urlpatterns = [
     # core
     path('', include('app.core.urls'), name = 'core'),
     # jogo
-    #path('', include('app.jogo.urls'), name = 'jogo'),
+    path('', include('app.jogo.urls'), name = 'jogo'),
 ]
