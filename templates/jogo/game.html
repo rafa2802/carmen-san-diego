@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Camen San Diego - França</title>
+	<link href="https://fonts.googleapis.com/css?family=Aldrich|Allerta+Stencil|Bangers|Barrio|Black+Ops+One|Bungee+Shade|Diplomata|Faster+One|Holtwood+One+SC|Monofett|New+Rocker|Pacifico|Press+Start+2P|Righteous|Sigmar+One" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+<style type="text/css">
+body {
+	font-family: 'Press Start 2P';
+}
+
+p {
+	font-family: 'Press Start 2P';
+	font-size: 14px;
+}
+
+.tudo {
+	display: table;
+}
+
+.border {
+	border: 5px solid #fff;
+}
+
+.rigth {
+	float: left;
+}
+
+.imagem-wrapper {
+    width: 40%;
+    height: 544px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+}
+
+.conteudo {
+	margin-left: 42%;
+	height: 450px;
+	padding: 10px;
+}
+
+.botoes {
+	margin-top: 2%;
+	margin-left: 42%;
+}
+
+.imagem {
+    width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+	</style>
+</head>
+<body style="background-color: #141414;">
+	<div style="display: inline-block;">
+	<div style="color: #fff; text-align: center; font-family: 'Press Start 2P'; font-size: 11px; margin-bottom: 5px;" class="border">
+		<h1>{{pais.nome}}</h1>
+	</div>
+	<div class="imagem-wrapper border">
+		<img class="imagem" src="/media/{{pais.imagem_pais}}">
+	</div>
+	<div style="color: #fff; font-family: 'Press Start 2P';" class="conteudo border">
+		<p>{{pais.descricao}}</p>
+	</div>
+	<div style="font-family: 'Press Start 2P';" class="botoes">
+		<button class="btn btn-default" type="button" data-toggle="modal" data-target="#Testemunhas"><span class="glyphicon glyphicon-user"></span> Testemunhas</button>
+		<button class="btn btn-default" type="button" data-toggle="modal" data-target="#Viajar"><i class="fas fa-plane-departure"></i> Viajar</button>
+		<a href="{% url 'jogo:salvar' pais.pk %}"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar e <span class="glyphicon glyphicon-log-out"></span> Sair</button></a>
+	</div>
+	</div>
+
+	<!-- Modal Viajar -->
+	<div class="modal fade" id="Viajar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Para onde deseja viajar?</h4>
+	      </div>
+	      <div class="modal-body">
+			<div class="row">
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <a href="/pais/{{pais.pais_um.pk}}"><img src="/media/{{pais.pais_um_imagem}}" alt="{{pais.pais_um.nome}}"></a>
+			      <div class="caption" style="text-align: center;">
+			        <a href="/pais/{{pais.pais_um.pk}}"><p>{{pais.pais_um.nome}}</p></a>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <a href="/pais/{{pais.pais_dois.pk}}"><img src="/media/{{pais.pais_dois_imagem}}" alt="{{pais.pais_dois.nome}}"></a>
+			      <div class="caption" style="text-align: center;">
+			        <a href="/pais/{{pais.pais_dois.pk}}"><p>{{pais.pais_dois.nome}}</p></a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal Testemunhas -->
+	<div class="modal fade" id="Testemunhas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Testemunhas</h4>
+	      </div>
+	      <div class="modal-body">
+			<div class="media">
+			  <div class="media-left">
+			      <img class="media-object" src="/media/{{pais.testemunha_um_imagem}}" alt="{{pais.testemunha_um_nome}}" width="100">
+			  </div>
+			  <div class="media-body">
+			    <h4 class="media-heading">{{pais.testemunha_um_nome}}</h4>
+			    {{pais.testemunha_um_fala}}
+			  </div>
+			</div>
+
+			<div class="media">
+			  <div class="media-left">
+			      <img class="media-object" src="/media/{{pais.testemunha_dois_imagem}}" alt="{{pais.testemunha_dois_nome}}" width="100">
+			  </div>
+			  <div class="media-body">
+			    <h4 class="media-heading">{{pais.testemunha_dois_nome}}</h4>
+			    {{pais.testemunha_dois_fala}}
+			  </div>
+			</div>
+	      </div>
+	      <div class="modal-footer"></div>
+	    </div>
+	  </div>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+</body>
+</html>

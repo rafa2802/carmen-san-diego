@@ -2,114 +2,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Camen San Diego - França</title>
+	<title>Camen SanDiego</title>
 	<link href="https://fonts.googleapis.com/css?family=Aldrich|Allerta+Stencil|Bangers|Barrio|Black+Ops+One|Bungee+Shade|Diplomata|Faster+One|Holtwood+One+SC|Monofett|New+Rocker|Pacifico|Press+Start+2P|Righteous|Sigmar+One" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 
 <style type="text/css">
-p {
+body {
 	font-family: 'Press Start 2P';
-	font-size: 14px;
 }
 
-.tudo {
-	display: table;
+p {
+	color: #fff;
+	position: absolute;
+	top: 15%;
 }
 
-.border {
-	border: 5px solid #fff;
+.button-login {
+	position: absolute;
+	top: 80%;
 }
 
-.rigth {
-	float: left;
+.button-cadastro {
+	position: absolute;
+	top: 80%;
+	left: 10%;
 }
 
-.imagem-wrapper {
-    width: 40%;
-    height: 544px;
-    overflow: hidden;
-    position: relative; /* Para fazer que a imagem com position-absolute respeite a sua posição consoante este selector, ou evitar que saia do mesmo */
-    float: left;
+.button-nova {
+	position: absolute;
+	top: 80%;
 }
 
-.conteudo {
-	margin-left: 42%;
-	height: 450px;
-	padding: 10px;
+.button-continuar {
+	position: absolute;
+	top: 80%;
+	left: 18%;
 }
 
-.botoes {
-	margin-top: 2%;
-	margin-left: 42%;
+.button-sair {
+	position: absolute;
+	top: 90%;
+	left: 15%;
 }
 
-.imagem {
-    width: 800px;
-    /* código abaixo centra a imagem ao centro */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+.erro {
+	position: absolute;
+	top: 25%;
 }
-	</style>
+</style>
 </head>
-<body style="background-color: #141414;">
-	<div style="display: inline-block;">
-	<div style="color: #fff; text-align: center; font-family: 'Press Start 2P'; font-size: 11px; margin-bottom: 5px;" class="border">
-		<h1>França - Paris</h1>
-	</div>
-	<div class="imagem-wrapper border">
-		<img class="imagem" src="https://abrilveja.files.wordpress.com/2016/05/alx_torre_eiffel_original.jpeg">
-	</div>
-	<div style="color: #fff; font-family: 'Press Start 2P';" class="conteudo border">
-		<p>França, oficialmente República Francesa é um país, ou, mais especificamente, um Estado unitário desconcentrado, localizado na Europa Ocidental, com várias ilhas e territórios ultramarinos noutros continentes.</p>
-	</div>
-	<div style="font-family: 'Press Start 2P';" class="botoes">
-		<button class="btn btn-default" type="button" data-toggle="modal" data-target="#Testemunhas"><span class="glyphicon glyphicon-user"></span> Testemunhas</button>
-		<button class="btn btn-default" type="button" data-toggle="modal" data-target="#Viajar"><i class="fas fa-plane-departure"></i> Viajar</button>
-		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar e <span class="glyphicon glyphicon-log-out"></span> Sair</button>
-	</div>
-	</div>
+<body style="background-image: url({% static 'images/carmen.jpg' %}); background-repeat: no-repeat; background-position: 30% 25%;">
+	{% if request.user.is_authenticated %}
+	<p>Bem vindo, agente {{ request.user.username }}! <br>Selecione uma das opções e divirta-se.</p>
+	<a href="{% url 'jogo:partida' %}"><button class="btn btn-default button-nova" type="button"><i class="fas fa-plus"></i> Nova Partida</button></a>
+	<a href="{% url 'jogo:continuar' %}"><button class="btn btn-default button-continuar" type="button"><i class="fas fa-gamepad"></i> Continuar Partida</button></a>
+	<a href="{% url 'core:logout' %}"><button class="btn btn-danger button-sair" type="button"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sair</button></a>
+	{% if mensagem %}
+	<p class="erro">{{mensagem}} <br> Para continuar uma partida você deve ter partidas salvas.</p>
+	{% endif %}
 
-	<!-- Modal Viajar -->
-	<div class="modal fade" id="Viajar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Para onde deseja viajar?</h4>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<!-- Modal Testemunhas -->
-	<div class="modal fade" id="Testemunhas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Veja o que as testemunhas tem a dizer</h4>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	{% else %}
+		<p>Bem vindo, ao jogo Carmen SanDiego. <br>Para começar, crie uma conta ou faça login!</p>
+		<a href="{% url 'core:login' %}"><button class="btn btn-default button-login" type="button"><span class="glyphicon glyphicon-user"></span> Login</button></a>
+		<a href="{% url 'core:cadastro' %}"><button class="btn btn-default button-cadastro" type="button"><i class="fas fa-plane-departure"></i> Cadastro</button></a>
+	{% endif %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
